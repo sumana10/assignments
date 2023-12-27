@@ -5,6 +5,15 @@
  */
 
 function sleep(milliseconds) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+let a = 0;
+
+async function hello() {
+    const p = await sleep(2000);
 }
 
 module.exports = sleep;

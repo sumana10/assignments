@@ -39,11 +39,119 @@
 
   Testing the server - run `npm run test-todoServer` command in terminal
  */
-  const express = require('express');
-  const bodyParser = require('body-parser');
+//   const express = require("express");
+//   const app = express();
   
-  const app = express();
+//   app.use(express.json());
+//   const todos = [];
   
-  app.use(bodyParser.json());
+//   // 1.GET /todos - Retrieve all todo items
+//   app.get("/todos", (req, res) => {
+//     return res.status(200).json(todos);
+//   });
+  
+//   // 2.GET /todos/:id - Retrieve a specific todo item by ID
+//   app.get(`/todos/:id`, (req, res) => {
+//     const id = req.params.id;
+//     //checking if the id exist or not
+//     const index = todos.findIndex((item) => item.id == id);
+//     if (index == -1) return res.status(404).send("Not Found");
+//     return res.status(200).send(todos[index]);
+//   });
+  
+//   // 3. POST /todos - Create a new todo item
+//   app.post("/todos", (req, res) => {
+//     const { title, completed, description } = req.body;
+//     const id = Math.round(Math.random() * 100000);
+//     todos.push({ id, title, completed, description });
+//     res.status(201).send(todos[todos.length - 1]);
+//   });
+  
+//   // 4. PUT /todos/:id - Update an existing todo item by ID
+//   app.put("/todos/:id", (req, res) => {
+//     const id = parseInt(req.params.id);
+//     for (let i = 0; i < todos.length; i++) {
+//       if (todos[i].id == id) {
+//         const newObj = {
+//           ...todos[i],
+//           ...req.body,
+//         };
+//         todos[i] = newObj;
+//         return res.status(200).send(newObj);
+//       }
+//     }
+//     res.status(404).send("Not found");
+//   });
+  
+//   // 5. DELETE /todos/:id - Delete a todo item by ID
+//   app.delete("/todos/:id", (req, res) => {
+//     const id = parseInt(req.params.id);
+//     const index = todos.findIndex((item) => item.id === id);
+//     if (index == -1) return res.status(404).send("NOT FOUND");
+  
+//     todos.splice(index, 1);
+//     res.status(200).send("deleted successfully");
+//   });
+// module.exports = app;
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+ app.use(bodyParser.json());
   
   module.exports = app;
+var todos =[];
+app.get('/todos',(req,res)=>{
+   res.send(todos);
+})
+
+app.get('/todos/:id',(req,res)=>{
+  const req_id=req.params.id;
+  for(let i of todos){
+    if(i.id==req_id) res.status(200).json(i)
+  }
+  res.status(404).send("NOT Found")
+})
+
+app.post('/todos',(req,res)=>{
+  const giventodo=req.body;
+  const id=Math.floor(Math.random()*1000).toString();
+  giventodo.id=id;
+  todos.push(giventodo);
+  res.status(201).json({
+      id
+  })
+})
+app.put('/todos/:id',(req,res)=>{
+  const id=req.params.id;
+  const giventodo=req.body;
+  giventodo.id=id;
+ // for(let i of todos){ cant use becasue pass by value is i
+    for(let i=0;i<todos.length;i++){
+     if(todos[i].id==id){
+      todos[i]=giventodo;
+          res.status(200).json(todos[i])
+    }
+  }
+  res.status(404).send("NOT FOUND")
+})
+
+app.delete('/todos/:id',(req,res)=>{
+  const id=req.params.id;
+  for(let i=0;i<todos.length;i++){
+    if(todos[i].id==id){
+     todos.splice(i,1);
+    res.status(200).send("deleted");
+   }
+ }
+ res.status(404).send("NOT FOUND")
+})
+
+app.use((req, res, next) => {
+  res.status(404).send();
+});
+
+app.listen(3001,()=>{
+  console.log("port 3001 running sir ");
+})
+  
