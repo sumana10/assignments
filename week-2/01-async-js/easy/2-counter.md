@@ -4,7 +4,15 @@ Without using setInterval, try to code a counter in Javascript. There is a hint 
 
 
 
+let counter = 0;
 
+function incrementCounter() {
+  counter++;
+  console.log('Counter:', counter);
+  setTimeout(incrementCounter, 1000);
+}
+
+incrementCounter();
 
 
 
