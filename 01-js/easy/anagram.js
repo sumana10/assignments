@@ -29,19 +29,37 @@
 // }
 
 // module.exports = isAnagram;
-function check(strx, stry) {
-  let a = 0;
-  for (let i = 0; i < strx.length; i++) {
-    for (let j = 0; j < stry.length; j++) {
-      if (strx[i] == stry[j]) {
-        a += 1;
+// function check(strx, stry) {
+//   let a = 0;
+//   for (let i = 0; i < strx.length; i++) {
+//     for (let j = 0; j < stry.length; j++) {
+//       if (strx[i] == stry[j]) {
+//         a += 1;
+//         break;
+//       }
+//     }
+//   }
+//   return a == strx.length;
+// }
+function check(strx,stry){
+  let a=0;
+  for (let i=0;i<strx.length;i++){
+    for(let j=0;j<strx.length;j++){
+      if(strx[i] == stry[j]){
+        a+=1;
         break;
       }
     }
   }
-  return a == strx.length;
+  if(a == strx.length){
+    // console.log("true");
+    return true;
+  }
+  else{
+    // console.log("false");
+    return false;
+  }
 }
-
 function isAnagram(str1, str2) {
   x = str1.toLowerCase();
   y = str2.toLowerCase();
