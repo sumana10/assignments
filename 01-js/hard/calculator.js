@@ -16,6 +16,108 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
 
-module.exports = Calculator;
+// class Calculator {
+//   constructor(){
+//     this.result=0;
+//   }
+//   add(num){
+//     this.result+=num;
+//   }
+//   subtract(num){
+//     this.result-=num;
+//   }
+//   multiply(num){
+//     this.result*=num;
+//   }
+//   divide(num){
+//     if(num==0){
+//       throw new Error("Can't divide by zero");
+//     }
+//     this.result/=num;
+//   }
+//   clear(){
+//     this.result=0;
+//   };
+  
+//   getResult(){
+//     return this.result;
+//   }
+//   calculate(expression) {
+//     const temp = expression;
+//     const cleanedExpression = temp.replace(/\s+/g, '');
+//     const validExpression = /^[0-9+\-*/().]+$/.test(cleanedExpression);
+  
+//     if (!validExpression) {
+//         throw new Error("Invalid expression.");
+//     }
+  
+//     try {
+//         this.result = eval(expression);
+//     } catch (err) {
+//         throw new Error("Invalid expression.")
+//     }
+//     if (this.result === Infinity) {
+//         throw new Error("Cannot divide a number by 0.")
+//     }
+//     return this.result;
+//   }
+  
+//   };
+
+  class Calculator {
+    constructor() {
+      this.result = 0;
+    }
+  
+    add(number) {
+      this.result += number;
+    }
+  
+    subtract(number) {
+      this.result -= number;
+    }
+  
+    multiply(number) {
+      this.result *= number;
+    }
+  
+    divide(number) {
+      if (number === 0) {
+        throw new Error("Invalid expression: Division by zero");
+      }
+      this.result /= number;
+    }
+  
+    clear() {
+      this.result = 0;
+    }
+  
+    getResult(){
+          return this.result;
+    }
+    calculate(inputExpression) {
+      const temp = inputExpression;
+      const cleanedExpression = temp.replace(/\s+/g, '');
+      const isValidExpression = /^[0-9+\-*/().]+$/.test(cleanedExpression);
+    
+      if (!isValidExpression) {
+        throw new Error("Invalid expression.");
+      }
+    
+      try {
+        this.result = eval(inputExpression);
+      } catch (error) {
+        throw new Error("Invalid expression.");
+      }
+    
+      if (this.result === Infinity) {
+        throw new Error("Cannot divide a number by 0.");
+      }
+    
+      return this.result;
+    }
+    
+  }
+  
+  module.exports = Calculator;
