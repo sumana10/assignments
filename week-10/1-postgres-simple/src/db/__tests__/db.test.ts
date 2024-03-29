@@ -19,8 +19,8 @@ describe('User Database Operations', () => {
         const password = 'testpass';
         const name = 'Test User';
 
-        await createUser(username, password, name);
-        const user = await client.query('SELECT * FROM users WHERE username = $1', [username]);
+       await createUser(username, password, name);
+       const user = await client.query('SELECT * FROM users WHERE username = $1', [username]);
         expect(user.rows[0]).toHaveProperty('username', username);
         expect(user.rows[0]).toHaveProperty('name', name);
         expect(user.rows[0].password).toBe(password);
