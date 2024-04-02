@@ -1,0 +1,128 @@
+<html>
+    <script>
+       async function populateDiv() {
+            const principle = document.getElementById("p").value;
+            const rate = document.getElementById("r").value;
+            // const time = document.getElementById("t").value;
+            // const element = document.getElementById("finalSum")
+            // element.innerHTML = parseInt(a) + parseInt(b);
+            // string => number
+            // "1111" => 1111
+
+            const response = await fetch("http://localhost:3000/sum?a="+principle+"&b="+rate)
+
+            const ans = await response.text();
+            document.getElementById("calculate").innerHTML = ans;
+
+
+        }
+    </script>
+    <body>
+        <input id="p" type="text" placeholder="First number"></input> <br></br>
+        <input id="r" type="text" placeholder="Second number"></input> <br></br>
+        <input id="t" type="text" placeholder="Second number"></input> <br></br>
+        <button onclick="populateDiv()">Calculate sum</button> <br></br>
+        <div id="calculate"></div>
+    </body>
+</html>
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <form>
+        Enter Something<br>
+        <input id="firstNumber" type="text" placeholder="First Number"></input>
+        <br>
+        <br>
+        <input id="secondNumber" type="text" placeholder="Second Number"></input>
+        <br>
+        <br>
+        <button type="button" onclick="populateDiv()">Calculate Sum</button><br>
+        <div id="finalSum"></div>
+    </form>
+    <script>
+        function populateDiv() {
+         //   event.preventDefault();
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+
+            fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(function(data) {
+                    document.getElementById("finalSum").innerHTML = data;
+                })
+                .catch(function(error) {
+                    console.error('Fetch error:', error);
+                });
+        }
+    </script>
+</body>
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    function populateDiv() {
+      const a = document.getElementById("firstNumber").value;
+      const b = document.getElementById("secondNumber").value;
+      fetch("http://localhost:3000/sum?a=" + a + "&b=" + b)
+        .then(response => response.text())
+        .then(result => {
+          const element = document.getElementById("finalSum");
+          element.innerHTML = parseInt(result);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</head>
+
+<body>
+  <input id="firstNumber" type="text" placeholder="First number">
+  <input id="secondNumber" type="text" placeholder="Second number">
+  <button onclick="populateDiv()">Calculate Sum</button>
+  <div id="finalSum"></div>
+</body>
+
+</html> -->
+<!-- <html>
+  <script>
+    function addTodo() {
+      const title = document.getElementById("title");
+      const description = document.getElementById("description");
+      console.log(title.value);
+      console.log(description.value);
+    }
+  </script>
+  <div>
+    <input id="title" type="text" placeholder="Title">
+    <br>
+    <input id="description" type="text" placeholder="Description">
+    <br>
+    <button onclick="addTodo()">Add todo</button>
+  </div>
+</html> -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload</title>
+</head>
+<body>
+  <h1>File Upload</h1>
+  <form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+</body>
+</html> -->
